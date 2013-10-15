@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID"
+	version="2.4"
+	xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://java.sun.com/xml/ns/j2ee
+		http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+	<display-name>EmpTaskTracker</display-name>
+
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+		
+<!-- Required for Session Beans to Work -->
+
+	<listener>
+		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+	</listener>
+	
+<!-- Application Context -->
+
+	<context-param>
+		<description>
+			Points at the XML configuration for the Spring Context. Locale and
+			 Security are compulsory, and should be left as is, but the idea is
+			 we can swap out the JDBC and DataSource configuration for other
+			 implementations, if necessary.
+		</description>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			/WEB-INF/context/springJdbc.xml
+		</param-value>
+	</context-param>
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+<!-- Servlets to handle page requests -->
+
+
+
+	<servlet>
+		<servlet-name>sysLogin</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>namespace</param-name>
+			<param-value>servlets/sysLogin-servlet</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>sysLogin</servlet-name>
+		<url-pattern>*.login</url-pattern>
+	</servlet-mapping>
+
+
+	
+
+</web-app>
